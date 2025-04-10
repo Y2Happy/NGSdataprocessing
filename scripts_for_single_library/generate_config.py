@@ -19,6 +19,8 @@ def parse_arguments():
                       help='Regex pattern for sequence filtering')
     parser.add_argument('--output-file', type=str, default='config.json',
                       help='Output config file path')
+    parser.add_argument('--motif', type=str, default='DMT',
+                      help='Motif for plot generation')
     return parser.parse_args()
 
 def main():
@@ -37,6 +39,7 @@ def main():
         "output_path": os.path.join(args.output_dir, "reads_cpm_FC.csv"),
         "df_path": os.path.join(args.output_dir, "reads_cpm_FC.csv"),
         "plot_output": os.path.join(args.output_dir, f"{args.experiment}plot.png"),
+        'motif': 'DMT',
         "top_n": 100,
         "min_val": 1,
         "max_val": 1000000
