@@ -1,11 +1,10 @@
 # NGS Data Processing Package - User Guide
 
 This guide will walk you through how to use the NGS data processing package (file downloaded from https://48hd.cloud/) for biopanning using p3 library step by step, even if you have no experience with Python.
-**Important Note: This package can be used for data processing with:
 
+**Important Note: This package can be used for data processing with:
 A single library configuration, or
 Two libraries with separate SDB codes
-
 Please download the appropriate version according to your research needs.
 
 ## Prerequisites
