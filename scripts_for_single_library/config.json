@@ -1,0 +1,16 @@
+{
+    "input_zip": "./KY20250404R3MBX\\input.zip",
+    "output_zip": "./KY20250404R3MBX\\output.zip",
+    "input_csv": "./KY20250404R3MBX\\R3input.csv",
+    "output_csv": "./KY20250404R3MBX\\R3output.csv",
+    "output_file": "./KY20250404R3MBX\\R3forDE.csv",
+    "pattern": "^S...C.........C",
+    "r_script_path": "./tmm_normalization.R",
+    "file_path": "./KY20250404R3MBX\\R3DE.txt",
+    "output_path": "./KY20250404R3MBX\\reads_cpm_FC.csv",
+    "df_path": "./KY20250404R3MBX\\reads_cpm_FC.csv",
+    "plot_output": "./KY20250404R3MBX\\R3plot.png",
+    "top_n": 100,
+    "min_val": 1,
+    "max_val": 1000000
+}
