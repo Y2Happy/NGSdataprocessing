@@ -51,12 +51,12 @@ If you want to run only specific steps:
 python data_cleaning.py --config config.json --skip-to-step NUMBER
 ```
 Where NUMBER is:
-1. Process input zip
-2. Process output zip
-3. Clean data
-4. TMM normalization
-5. Post-differential expression processing
-6. Generate plots
+1. Process input zip (unzip the input file to txt)
+2. Process output zip (unzip output file to txt)
+3. Clean data (remove repetitive lines, blank and peptides that do not belong to the library, combine input and output files)
+4. TMM normalization (normalize input and output)
+5. Post-differential expression processing (calculate the fold change, counts per million value for plotting)
+6. Generate plots 
 
 ### Changing Parameters
 
