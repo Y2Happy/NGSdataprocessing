@@ -1,0 +1,21 @@
+{
+    "input_zip": "./dataset\\input.zip",
+    "output_zip": "./dataset\\output.zip",
+    "input_csv": "./dataset\\R3input.csv",
+    "output_csv": "./dataset\\R3output.csv",
+    "output_file": "./dataset\\R3forDE.csv",
+    "pattern": "^S...C.........C",
+    "library": "EJ0.SDB21",
+    "baseline": "EJ0.SDB17",
+    "r_script_path": "./tmm_normalization.R",
+    "file_path": "./dataset\\R3DE.txt",
+    "inputtiter": 9.75e8,
+    "outputtiter": 5.43e6,
+    "output_path": "./dataset\\reads_cpm_FC.csv",
+    "df_path": "./dataset\\reads_cpm_FC.csv",
+    "plot_output": "./dataset\\R3plot.png",
+    "motif": "DMT",
+    "top_n": 100,
+    "min_val": 1,
+    "max_val": 1000000
+}
