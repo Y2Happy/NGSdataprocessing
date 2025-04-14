@@ -21,7 +21,7 @@ def plot_input_vs_output(df, top_n=100, motif='DMT', min_val=1, max_val=10**6, o
     motif_rows = df[df['sequence'].str.contains(motif, case=False, na=False)]
     
     # Get top N rows based on the 'outputcpm' column
-    top_n_rows = df.nlargest(top_n, 'outputcpm')
+    top_n_rows = df.nlargest(top_n, 'outputcpmplot')
 
     # Find overlap between top N rows and motif matches
     overlap = pd.merge(top_n_rows, motif_rows, how='inner')
@@ -34,7 +34,7 @@ def plot_input_vs_output(df, top_n=100, motif='DMT', min_val=1, max_val=10**6, o
     
     if 'group' in df.columns:  # If 'group' column exists
         # Plot Group 2 as green
-        group_baseline_df = df[df['group'].isin([2, 3])]       # Plot other groups with a default color
+        group_baseline_df = df[df['group'].isin([2])]       # Plot other groups with a default color
         data = df[df['group'] == 1]
         plt.scatter(data['inputcpmplot'], data['outputcpmplot'], color='blue', linewidth=0.2, s=50)        
         plt.scatter(group_baseline_df['inputcpmplot'], group_baseline_df['outputcpmplot'], color='green', linewidth=0.2, s=50, label='baseline')

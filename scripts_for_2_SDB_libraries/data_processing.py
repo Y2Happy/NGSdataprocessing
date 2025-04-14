@@ -105,17 +105,10 @@ def process_afterDE(file_path, output_path, pattern=r'^S...C.........C', inputti
     df['input_average'] = df[input_columns].mean(axis=1)
     df['output_average'] = df[output_columns].mean(axis=1)
 
-    # Calculate total sums of averages
-    sum_average_reads_input = df['input_average'].sum()
-    sum_average_reads_output = df['output_average'].sum()
-
-    # Calculate CPM values
-    df['inputcpm'] = (df['input_average'] / sum_average_reads_input) * 1_000_000
-    df['outputcpm'] = (df['output_average'] / sum_average_reads_output) * 1_000_000
 
     # Adjust CPM values for plotting
-    df['inputcpmplot'] = df['inputcpm'] + 1
-    df['outputcpmplot'] = df['outputcpm'] + 1
+    df['inputcpmplot'] = df['input_average'] + 1
+    df['outputcpmplot'] = df['output_average'] + 1
 
     # Calculate fold change (FC)
     df['FC'] = df['outputcpmplot'] / df['inputcpmplot']
@@ -135,9 +128,6 @@ def process_afterDE(file_path, output_path, pattern=r'^S...C.........C', inputti
         df['outputtiter'] / df['inputtiter']
     )
 
-    # Drop intermediate columns
-    columns_to_drop = ['input_average', 'output_average']
-    df = df.drop(columns=columns_to_drop)
    
     # Save the processed DataFrame to a CSV file
     df.to_csv(output_path, index=False)
