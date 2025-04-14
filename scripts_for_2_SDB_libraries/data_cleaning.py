@@ -53,12 +53,6 @@ def main():
     with open(args.config, 'r') as config_file:
         config = json.load(config_file)
     
-    # Update paths if experiment name is provided
-    if args.experiment:
-        for key in config:
-            if isinstance(config[key], str):
-                config[key] = config[key].replace("R3", args.experiment)
-        print(f"Updated paths for experiment: {args.experiment}")
     
     # Create output directories if they don't exist
     output_dirs = [os.path.dirname(p) for p in [
