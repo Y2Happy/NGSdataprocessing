@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import re
 def preprocess_data(df, pattern, library, baseline):
     """
     Preprocess the input DataFrame:
@@ -8,11 +9,15 @@ def preprocess_data(df, pattern, library, baseline):
     - Remove rows containing '*' or 'blank'
     - Trim peptides to the first 15 amino acids
     """
+    lib_pattern = re.compile(f'.*SDB{library}.*', re.IGNORECASE)
+    base_pattern = re.compile(f'.*SDB{baseline}.*', re.IGNORECASE)
+    df['is_library'] = df['SDB'].astype(str).apply(lambda x: bool(lib_pattern.match(x)))
+    df['is_baseline'] = df['SDB'].astype(str).apply(lambda x: bool(base_pattern.match(x)))
     print(f"Total peptides: {len(df)}")
-    print(f"Library peptides: {(df['SDB'] == library).sum()}")
-    print(f"Library peptides matching pattern: {((df['SDB'] == library) & df['peptide'].str.contains(pattern)).sum()}")
-    print(f"Baseline peptides: {(df['SDB'] == baseline).sum()}")
-    print(f"Baseline peptides matching pattern: {((df['SDB'] == baseline) & df['peptide'].str.contains(pattern)).sum()}")
+    print(f"Library peptides (matching SDB{library}): {df['is_library'].sum()}")
+    print(f"Library peptides matching pattern: {(df['is_library'] & df['peptide'].str.contains(pattern)).sum()}")
+    print(f"Baseline peptides (matching SDB{baseline}): {df['is_baseline'].sum()}")
+    print(f"Baseline peptides matching pattern: {(df['is_baseline'] & df['peptide'].str.contains(pattern)).sum()}")
     non_string_peptides = df[~df['peptide'].apply(lambda x: isinstance(x, str))]
     print("Peptides that are not strings (likely NaNs or floats):")
     print(non_string_peptides['peptide'].unique())
@@ -21,13 +26,14 @@ def preprocess_data(df, pattern, library, baseline):
     df = df[~df['peptide'].str.contains('blank')]
     df = df[df['peptide'].str.len() >= 7]
     df = df[
-        ((df["SDB"] == library) & df["peptide"].str.contains(pattern)) | 
-        ((df["SDB"] == baseline) & ~df["peptide"].str.contains(pattern))
+        ((df["is_library"]) & df["peptide"].str.contains(pattern)) | 
+        ((df["is_baseline"]) & ~df["peptide"].str.contains(pattern))
     ]
     df['peptide'] = df['peptide'].str[:15]
-    lib_matches = df[(df["SDB"] == library) & df["peptide"].str.contains(pattern)]
+    lib_matches = df[df["is_library"] & df["peptide"].str.contains(pattern)]
     print("Matching peptides from library:")
     print(lib_matches['peptide'].head(10))
+    df = df.drop(['is_library', 'is_baseline'], axis=1)
     return df
 
 def aggregate_reads(df):
