@@ -2,9 +2,10 @@
 
 This guide will walk you through how to use the NGS data processing package (file downloaded from https://48hd.cloud/) for biopanning using p3 library step by step, even if you have no experience with Python.
 
-**Important Note: This package can be used for data processing with:
-A single library configuration, or
-Two libraries with separate SDB codes
+**Important Note:** This package can be used for data processing with:
+- A single library configuration, or
+- Two libraries with separate SDB codes
+
 Please download the appropriate version according to your research needs.
 
 ## Prerequisites
@@ -20,11 +21,12 @@ Please download the appropriate version according to your research needs.
 Run the following command to create a configuration file for your experiment:
 
 ```
-python generate_config.py --experiment YOUR_EXPERIMENT_NAME --input-dir C:\path\to\your\zip\files --output-dir C:\path\to\desired\output\folder --pattern your_library_pattern --library SDB_for_the_library --baseline SDB_for_the_baseline...
-
+python generate_config.py --experiment YOUR_EXPERIMENT_NAME --input-dir C:\path\to\your\zip\files --output-dir C:\path\to\desired\output\folder --pattern your_library_pattern --library SDB_for_the_library --baseline SDB_for_the_baseline
 ```
+
 ### Step 2: Run the Data Processing Script
 
+```
 python data_cleaning.py --config config.json --run-r --experiment YOUR_EXPERIMENT_NAME
 ```
 
@@ -75,4 +77,5 @@ To modify settings like pattern matching or motifs, edit the config.json file af
    python data_cleaning.py --config config.json --run-r
    ```
 5. View the results in the output directory
+
 
